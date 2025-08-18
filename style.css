@@ -145,3 +145,26 @@ body{
 .heading{
     margin: 1rem 0;
 }
+.Forecast div {height:300px;}
+
+/* @media (min-width:370px)and (max-width:768px) {
+    .container{
+        flex-direction: column;
+    }
+    .weather-input{
+    width:100%;
+    position:relative;
+    inset:none;
+    background-color: #78c1f3;
+    padding:1rem 2.5rem;
+}
+.weather-output{
+    width:100% ;
+    position:relative;
+    inset:none;
+    margin-left:0%;
+    padding:2rem;
+    background-color:#f6f6f6 ;
+    overflow:none;
+}
+} */

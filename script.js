@@ -24,6 +24,9 @@ WEATHER_DATA_ENDPOINT = `https://api.openweathermap.org/data/2.5/forecast?appid=
 // FUNCTION FOR WEATHER BASED ON CITY
 function findUserLocation() {
     Forecast.innerHTML = "";
+    if (userLocation==""){
+                alert(Empty);
+            }
     fetch(WEATHER_API_ENDPOINT + userLocation.value)
         .then((response) => response.json())
         .then((data) => {
@@ -31,6 +34,8 @@ function findUserLocation() {
                 alert(data.message);
                 return;
             }
+              
+            
             else {
                 city.innerHTML = data.name + ',' + data.sys.country;
                 weatherIcon.style.background = `url(https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png)`;
@@ -46,7 +51,7 @@ function findUserLocation() {
                 PValue.innerHTML = data.main.pressure + "Hpa";
                 WValue.innerHTML = data.wind.speed + "m/s";
                 forecast();
-               
+
             }
         })
 }
@@ -60,42 +65,51 @@ function forecast() {
                 return;
             }
             else {
-               
-console.log(data)
+
                 let div1 = document.createElement("div");
                 div1.innerHTML += `<h3>${data.list[2].dt_txt}</h3>`
                 div1.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[2].weather[0].icon}@2x.png"/>`
                 div1.innerHTML += `<p class="forecast-desc">${data.list[2].weather[0].description}</p>`;
+                div1.innerHTML += `<p class="fa-solid fa-water">&nbsp;&nbsp;Humidity&nbsp;${data.list[2].main.humidity}%</p><br>`
+                div1.innerHTML += `<p class="fa-solid fa-wind">&nbsp;&nbsp;Wind speed &nbsp;${data.list[2].wind.speed}m/s</p>`
                 div1.innerHTML += `<span><span>${TempConverter(data.list[2].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
-              
+
 
                 let div2 = document.createElement("div");
                 div2.innerHTML += `<h3>${data.list[10].dt_txt}</h3>`
                 div2.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[10].weather[0].icon}@2x.png"/>`
                 div2.innerHTML += `<p class="forecast-desc">${data.list[10].weather[0].description}</p>`;
+                div2.innerHTML += `<p class="fa-solid fa-water">&nbsp;&nbsp;Humidity&nbsp;${data.list[10].main.humidity}%</p><br>`
+                div2.innerHTML += `<p class="fa-solid fa-wind">&nbsp;&nbsp;Wind speed &nbsp;${data.list[10].wind.speed}m/s</p>`
                 div2.innerHTML += `<span><span>${TempConverter(data.list[10].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
-           
+
 
                 let div3 = document.createElement("div");
                 div3.innerHTML += `<h3>${data.list[18].dt_txt}</h3>`
                 div3.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[18].weather[0].icon}@2x.png"/>`
                 div3.innerHTML += `<p class="forecast-desc>${data.list[18].weather[0].description}"></p>`;
+                div3.innerHTML += `<p class="fa-solid fa-water">&nbsp;&nbsp;Humidity&nbsp;${data.list[18].main.humidity}%</p><br>`
+                div3.innerHTML += `<p class="fa-solid fa-wind">&nbsp;&nbsp;Wind speed &nbsp;${data.list[18].wind.speed}m/s</p>`
                 div3.innerHTML += `<span><span>${TempConverter(data.list[18].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
-               
+
                 let div4 = document.createElement("div");
                 div4.innerHTML += `<h3>${data.list[26].dt_txt}</h3>`
                 div4.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[26].weather[0].icon}@2x.png"/>`
                 div4.innerHTML += `<p class="forecast-desc>${data.list[26].weather[0].description}"></p>`;
+                div4.innerHTML += `<p class="fa-solid fa-water">&nbsp;&nbsp;Humidity&nbsp;${data.list[26].main.humidity}%</p><br>`
+                div4.innerHTML += `<p class="fa-solid fa-wind">&nbsp;&nbsp;Wind speed &nbsp;${data.list[26].wind.speed}m/s</p>`
                 div4.innerHTML += `<span><span>${TempConverter(data.list[26].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
-                
+
 
                 let div5 = document.createElement("div");
                 div5.innerHTML += `<h3>${data.list[34].dt_txt}</h3>`
                 div5.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[34].weather[0].icon}@2x.png"/>`
                 div5.innerHTML += `<p class="forecast-desc>${data.list[34].weather[0].description}"></p>`;
+                div5.innerHTML += `<p class="fa-solid fa-water">&nbsp;&nbsp;Humidity&nbsp;${data.list[34].main.humidity}%</p><br>`
+                div5.innerHTML += `<p class="fa-solid fa-wind">&nbsp;&nbsp;Wind speed &nbsp;${data.list[34].wind.speed}m/s</p>`
                 div5.innerHTML += `<span><span>${TempConverter(data.list[34].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
-         
-                Forecast.append(div1,div2,div3,div4,div5)
+
+                Forecast.append(div1, div2, div3, div4, div5)
             }
         })
 
@@ -115,8 +129,14 @@ function TempConverter(temp) {
 
     return message;
 }
+
+
+
+
 // THANKYOU
 
 
-    
+// let studentRecords = JSON.parse(localStorage.getItem('studentRecords')) || [];
 
+//  // Save to localStorage
+// localStorage.setItem('studentRecords', JSON.stringify(studentRecords));
