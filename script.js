@@ -1,3 +1,4 @@
+// CONSTANT DECLARATION
 const userLocation = document.getElementById('userLocation');
 const converter = document.getElementById('converter');
 const weatherIcon = document.querySelector('.weatherIcon');
@@ -15,10 +16,12 @@ const UVValue = document.querySelector('.UVValue');
 const PValue = document.querySelector('.PValue');
 const Forecast = document.querySelector('.Forecast');
 
+
+// WEATHER APIS
 WEATHER_API_ENDPOINT = `https://api.openweathermap.org/data/2.5/weather?appid=6fbfaf34a6b217687723315505218c74&units=metric&q=`;
 WEATHER_DATA_ENDPOINT = `https://api.openweathermap.org/data/2.5/forecast?appid=6fbfaf34a6b217687723315505218c74&units=metric&q=`
 
-
+// FUNCTION FOR WEATHER BASED ON CITY
 function findUserLocation() {
     Forecast.innerHTML = "";
     fetch(WEATHER_API_ENDPOINT + userLocation.value)
@@ -43,12 +46,11 @@ function findUserLocation() {
                 PValue.innerHTML = data.main.pressure + "Hpa";
                 WValue.innerHTML = data.wind.speed + "m/s";
                 forecast();
-                addCity();
-                selectCity();
+               
             }
         })
 }
-
+// FUNCTION FOR 5 DAYS FORECAST
 function forecast() {
     fetch(WEATHER_DATA_ENDPOINT + userLocation.value)
         .then((response) => response.json())
@@ -59,18 +61,18 @@ function forecast() {
             }
             else {
                
-
+console.log(data)
                 let div1 = document.createElement("div");
                 div1.innerHTML += `<h3>${data.list[2].dt_txt}</h3>`
                 div1.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[2].weather[0].icon}@2x.png"/>`
-                div1.innerHTML += `<p class="forecast-desc>${data.list[2].weather[0].description}"></p>`;
+                div1.innerHTML += `<p class="forecast-desc">${data.list[2].weather[0].description}</p>`;
                 div1.innerHTML += `<span><span>${TempConverter(data.list[2].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
               
 
                 let div2 = document.createElement("div");
                 div2.innerHTML += `<h3>${data.list[10].dt_txt}</h3>`
                 div2.innerHTML += `<img src="https://openweathermap.org/img/wn/${data.list[10].weather[0].icon}@2x.png"/>`
-                div2.innerHTML += `<p class="forecast-desc>${data.list[10].weather[0].description}"></p>`;
+                div2.innerHTML += `<p class="forecast-desc">${data.list[10].weather[0].description}</p>`;
                 div2.innerHTML += `<span><span>${TempConverter(data.list[10].main.temp_min)}</span>&nbsp;&nbsp;&nbsp;<span>${TempConverter(data.list[0].main.temp_max)}</span></span>`
            
 
@@ -99,7 +101,7 @@ function forecast() {
 
 }
 
-
+// TEMPERATURE CONVERTER FROM CELCIUS TO FRANEHITE 
 function TempConverter(temp) {
     let tempValue = Math.round(temp);
     let message = "";
@@ -113,6 +115,7 @@ function TempConverter(temp) {
 
     return message;
 }
+// THANKYOU
 
 
     
